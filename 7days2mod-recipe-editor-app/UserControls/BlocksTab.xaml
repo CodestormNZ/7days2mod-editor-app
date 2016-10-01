@@ -1,0 +1,74 @@
+﻿<UserControl x:Class="_7days2mod_recipe_editor_app.UserControls.BlocksTab"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:_7days2mod_recipe_editor_app.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="900">
+    <DockPanel>
+        <StackPanel Width="300" DockPanel.Dock="Right" Margin="10">
+            <StackPanel>
+                <Image Name="selectedBlockImage" Margin="0" Width="116" Height="80" />
+                <TextBlock Name="selectedBlockName" HorizontalAlignment="Center" FontWeight="Bold" FontSize="24" Margin="0,0,0,20"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="ID"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Name="selectedBlockID"/>
+
+                </Grid>
+
+
+            </StackPanel>
+        </StackPanel>
+        
+        <Grid>
+            <ListView Name="BlocksList">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <Setter Property="BorderBrush" Value="LightGray" />
+                        <Setter Property="BorderThickness" Value="0,0,0,1" />
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListViewBlocks_Preview" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.Resources>
+                    <Style TargetType="{x:Type GridViewColumnHeader}">
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        <Setter Property="VerticalContentAlignment" Value="Center" />
+                        <Setter Property="FontWeight" Value="Bold" />
+                        <Setter Property="Padding" Value="20,0,20,0" />
+                    </Style>
+                </ListView.Resources>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding image}" Margin="0" Width="58" Height="40" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding id}" >
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Tag="id" Click="BlocksListColumnHeader_Click">ID</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding name}" >
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Tag="name" Click="BlocksListColumnHeader_Click">Name</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+    </DockPanel>
+</UserControl>
