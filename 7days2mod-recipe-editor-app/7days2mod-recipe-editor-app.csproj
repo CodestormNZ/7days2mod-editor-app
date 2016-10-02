@@ -94,6 +94,7 @@
     </ApplicationDefinition>
     <Compile Include="SampleData\SampleData.cs" />
     <Compile Include="Services\Config.cs" />
+    <Compile Include="UIElements\Converter.cs" />
     <Compile Include="UIElements\SortAdorner.cs" />
     <Compile Include="Services\XMLService.cs" />
     <Compile Include="UserControls\BlocksTab.xaml.cs">

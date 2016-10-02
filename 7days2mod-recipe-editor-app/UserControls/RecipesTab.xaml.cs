@@ -109,13 +109,13 @@ namespace _7days2mod_recipe_editor_app.UserControls
 
         private bool NameFilter(object recipe)
         {
-            if (String.IsNullOrEmpty(nameFilter.Text))
+            if (string.IsNullOrEmpty(recipeNameFilter.Text))
                 return true;
             else
-                return ((recipe as Models.Recipe).name.IndexOf(nameFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0);
+                return ((recipe as Models.Recipe).name.IndexOf(recipeNameFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0);
         }
 
-        private void nameFilter_TextChanged(object sender, TextChangedEventArgs e)
+        private void recipeNameFilter_TextChanged(object sender, TextChangedEventArgs e)
         {
             CollectionViewSource.GetDefaultView(RecipesList.ItemsSource).Refresh();
         }

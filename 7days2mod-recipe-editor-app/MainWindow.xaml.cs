@@ -100,6 +100,9 @@ namespace _7days2mod_recipe_editor_app
             WinForms.DialogResult result = folderBrowserDialog.ShowDialog();
             if (result == WinForms.DialogResult.OK) {
                 selectedFolder.Text = folderBrowserDialog.SelectedPath;
+                //TODO: Update config and refresh data models
+                //TODO: Store path to app settings so it persists between executions
+                //TODO: Notify if path does not contain required files.
             }
         }
 

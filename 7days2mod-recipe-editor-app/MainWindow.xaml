@@ -9,17 +9,16 @@
         Icon="favicon.ico"
         Title="7Days2Mod - Editor" Height="720" Width="1280">
     <Window.Resources>
-        <DataTemplate x:Key="IngredientTemplate">
-            <WrapPanel>
-                <Image Source="{Binding image}" Margin="10,0,0,0" Width="29" Height="20" />
-                <TextBlock Text="{Binding Path=count}"/>
-                <TextBlock Text="x "/>
-                <TextBlock Text="{Binding Path=name}"/>
-            </WrapPanel>
-        </DataTemplate>
-        <DataTemplate x:Key="IngredientsTemplate">
-            <ItemsControl ItemsSource="{Binding Path=ingredients}" ItemTemplate="{StaticResource IngredientTemplate}" />
-        </DataTemplate>
+        <Style TargetType="{x:Type TabItem}">
+            <Setter Property="Width">
+                <Setter.Value>
+                    <MultiBinding Converter="{StaticResource TabSizeConverter}">
+                        <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType={x:Type TabControl}}" />
+                        <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType={x:Type TabControl}}" Path="ActualWidth" />
+                    </MultiBinding>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
     <DockPanel Background="LightGray">
         <StatusBar DockPanel.Dock="Bottom">
@@ -53,7 +52,7 @@
                 <ProgressBar Name="statusProgressBar" Value="0" Width="90" Height="16" />
             </StatusBarItem>
         </StatusBar>
-        <TabControl TabStripPlacement="Left" HorizontalContentAlignment="Left">
+        <TabControl TabStripPlacement="Top" HorizontalContentAlignment="Left">
             <TabControl.Resources>
                 <Style TargetType="{x:Type TabItem}">
                     <Setter Property="HeaderTemplate">
@@ -82,7 +81,7 @@
                     </WrapPanel>
                 </TabItem.Header>
                 <TabItem.Content>
-                    <Controls:RecipesTab x:Name="recipesTab"/>
+                    <Controls:RecipesTab x:Name="recipesTab" Width="1270"/>
                 </TabItem.Content>
             </TabItem>
             <TabItem>
@@ -95,7 +94,7 @@
                     </WrapPanel>
                 </TabItem.Header>
                 <TabItem.Content>
-                    <Controls:BlocksTab x:Name="blocksTab"/>
+                    <Controls:BlocksTab x:Name="blocksTab" Width="1270"/>
                 </TabItem.Content>
             </TabItem>
             <TabItem>
@@ -108,7 +107,7 @@
                     </WrapPanel>
                 </TabItem.Header>
                 <TabItem.Content>
-                    <Controls:ItemsTab x:Name="itemsTab"/>
+                    <Controls:ItemsTab x:Name="itemsTab" Width="1270"/>
                 </TabItem.Content>
             </TabItem>
             <TabItem>
@@ -118,7 +117,7 @@
                     </WrapPanel>
                 </TabItem.Header>
                 <TabItem.Content>
-                    <WrapPanel Background="LightGray">
+                    <WrapPanel Background="LightGray" Width="1270">
                         <TextBlock Margin="5,5,5,5"  Background="LightGray">Game Folder Path:</TextBlock>
                         <TextBlock Name="selectedFolder" Width="950" Margin="10,5,5,5" Padding="3" Background="White"></TextBlock>
                         <Button Name="folderButton" Width="100" Margin="5,5,5,5" HorizontalAlignment="Left" Click="folderButton_Click">Browse</Button>

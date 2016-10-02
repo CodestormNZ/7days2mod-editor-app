@@ -77,7 +77,7 @@
         </StackPanel>
         <WrapPanel DockPanel.Dock="Top" Margin="0,0,0,10" Width="auto" HorizontalAlignment="Left">
             <TextBox Margin="10" Width="58" Text="Filters" BorderThickness="0"/>
-            <TextBox Margin="10" Name="nameFilter" Width="250" TextChanged="nameFilter_TextChanged" />
+            <TextBox Margin="10" Name="recipeNameFilter" Width="250" TextChanged="recipeNameFilter_TextChanged" />
         </WrapPanel>
         <Grid>
             <ListView Name="RecipesList">
