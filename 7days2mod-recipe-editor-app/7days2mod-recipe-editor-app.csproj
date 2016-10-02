@@ -92,7 +92,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="SampleData\SampleData.cs" />
     <Compile Include="Services\Config.cs" />
     <Compile Include="UIElements\Converter.cs" />
     <Compile Include="UIElements\SortAdorner.cs" />
