@@ -4,6 +4,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -33,19 +34,43 @@ namespace _7days2mod_recipe_editor_app.UserControls
 
                 CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(RecipesList.ItemsSource);
                 PropertyGroupDescription groupDescription = new PropertyGroupDescription("craft_area_view");
+                view.GroupDescriptions.Add(groupDescription);
                 view.SortDescriptions.Add(new SortDescription("craft_area_view", ListSortDirection.Ascending));
                 view.SortDescriptions.Add(new SortDescription("craft_tool", ListSortDirection.Ascending));
                 view.SortDescriptions.Add(new SortDescription("name", ListSortDirection.Ascending));
-                view.GroupDescriptions.Add(groupDescription);
-                view.Filter = NameFilter;
+                view.Filter = rNameFilter;
+            }
+        }
+        public ObservableCollection<Models.Block> _blockData;
+        public ObservableCollection<Models.Block> blockData
+        {
+            get
+            {
+                return _blockData;
+            }
+            set
+            {
+                _blockData = value;
+                OnPropertyChanged("_blockData");
+            }
+        }
+        public ObservableCollection<Models.Item> _itemData;
+        public ObservableCollection<Models.Item> itemData
+        {
+            get
+            {
+                return _itemData;
+            }
+            set
+            {
+                _itemData = value;
+                OnPropertyChanged("_itemData");
             }
         }
 
         public RecipesTab()
         {
             InitializeComponent();
-
-
         }
 
         //INotifyPropertyChanged methods
@@ -107,7 +132,7 @@ namespace _7days2mod_recipe_editor_app.UserControls
             RecipesList.Items.SortDescriptions.Add(new SortDescription(sortBy, newDir));
         }
 
-        private bool NameFilter(object recipe)
+        private bool rNameFilter(object recipe)
         {
             if (string.IsNullOrEmpty(recipeNameFilter.Text))
                 return true;
@@ -118,6 +143,24 @@ namespace _7days2mod_recipe_editor_app.UserControls
         private void recipeNameFilter_TextChanged(object sender, TextChangedEventArgs e)
         {
             CollectionViewSource.GetDefaultView(RecipesList.ItemsSource).Refresh();
+        }
+
+        private void recipeDeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            var index = ((Button)sender).Tag;
+            var recipe = recipeData.LastOrDefault(p => p.index == (int)index);
+            recipeData.Remove(recipe);
+            CollectionViewSource.GetDefaultView(RecipesList.ItemsSource).Refresh();
+        }
+
+        private void filterClear_Click(object sender, RoutedEventArgs e)
+        {
+            recipeNameFilter.Text = "";
+        }
+
+        private void recipeAdd_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

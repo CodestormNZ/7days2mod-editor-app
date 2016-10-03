@@ -31,7 +31,7 @@ namespace _7days2mod_recipe_editor_app.UserControls
                 BlocksList.ItemsSource = _blockData;
 
                 CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(BlocksList.ItemsSource);
-                view.Filter = NameFilter;
+                view.Filter = bNameFilter;
             }
         }
 
@@ -102,7 +102,7 @@ namespace _7days2mod_recipe_editor_app.UserControls
         }
 
         //Filters
-        private bool NameFilter(object block)
+        private bool bNameFilter(object block)
         {
             if (string.IsNullOrEmpty(blockNameFilter.Text))
                 return true;
@@ -113,6 +113,11 @@ namespace _7days2mod_recipe_editor_app.UserControls
         private void blockNameFilter_TextChanged(object sender, TextChangedEventArgs e)
         {
             CollectionViewSource.GetDefaultView(BlocksList.ItemsSource).Refresh();
+        }
+
+        private void filterClear_Click(object sender, RoutedEventArgs e)
+        {
+            blockNameFilter.Text = "";
         }
     }
 }

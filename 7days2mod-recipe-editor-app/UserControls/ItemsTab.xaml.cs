@@ -4,7 +4,6 @@ using _7days2mod_recipe_editor_app.UIElements;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -31,6 +30,9 @@ namespace _7days2mod_recipe_editor_app.UserControls
                 _itemData = value;
                 OnPropertyChanged("_itemData");
                 ItemsList.ItemsSource = _itemData;
+
+                CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ItemsList.ItemsSource);
+                view.Filter = iNameFilter;
             }
         }
 
@@ -101,7 +103,7 @@ namespace _7days2mod_recipe_editor_app.UserControls
         }
 
         //Filters
-        private bool NameFilter(object item)
+        private bool iNameFilter(object item)
         {
             if (string.IsNullOrEmpty(itemNameFilter.Text))
                 return true;
@@ -112,6 +114,11 @@ namespace _7days2mod_recipe_editor_app.UserControls
         private void itemNameFilter_TextChanged(object sender, TextChangedEventArgs e)
         {
             CollectionViewSource.GetDefaultView(ItemsList.ItemsSource).Refresh();
+        }
+
+        private void filterClear_Click(object sender, RoutedEventArgs e)
+        {
+            itemNameFilter.Text = "";
         }
     }
 }

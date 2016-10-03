@@ -75,6 +75,8 @@ namespace _7days2mod_recipe_editor_app
             itemsTab.itemData = itemData;
             blocksTab.blockData = blockData;
             recipesTab.recipeData = recipeData;
+            recipesTab.itemData = itemData;
+            recipesTab.blockData = blockData;
 
             //set folder path in options
             selectedFolder.Text = config.defaultFolder;

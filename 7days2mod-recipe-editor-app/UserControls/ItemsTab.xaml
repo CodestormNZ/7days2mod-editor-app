@@ -11,37 +11,37 @@
             <WrapPanel Visibility="{Binding Path=name, Converter={StaticResource valueVisiblityConverter}}" Margin="20,0,0,0">
                 <TextBlock Text="{Binding Path=name}" FontWeight="Bold"/>
                 <TextBlock Text=": "/>
-                <TextBlock Text="{Binding Path=value}"/>
-                <TextBlock Text=" (param1:" Visibility="{Binding Path=param1, Converter={StaticResource valueVisiblityConverter}}" FontStyle="Italic"/>
-                <TextBlock Text="{Binding Path=param1}" Visibility="{Binding Path=param1, Converter={StaticResource valueVisiblityConverter}}" FontStyle="Italic"/>
-                <TextBlock Text=")" Visibility="{Binding Path=param1, Converter={StaticResource valueVisiblityConverter}}" FontStyle="Italic"/>
+                <TextBlock Text="{Binding Path=value}" ToolTip="{Binding Path=value}" Foreground="Red"/>
+                <TextBlock Text=" (param1:" Visibility="{Binding Path=param1, Converter={StaticResource valueVisiblityConverter}}"/>
+                <TextBlock Text="{Binding Path=param1}" ToolTip="{Binding Path=param1}" Visibility="{Binding Path=param1, Converter={StaticResource valueVisiblityConverter}}" Foreground="Blue"/>
+                <TextBlock Text=")" Visibility="{Binding Path=param1, Converter={StaticResource valueVisiblityConverter}}"/>
             </WrapPanel>
         </DataTemplate>
         <DataTemplate x:Key="PropertyTemplate">
-            <StackPanel Width="480">
-                <WrapPanel Visibility="{Binding Path=name, Converter={StaticResource valueVisiblityConverter}}" Width="480">
+            <StackPanel Width="780">
+                <WrapPanel Visibility="{Binding Path=name, Converter={StaticResource valueVisiblityConverter}}" Width="780">
                     <TextBlock Text="{Binding Path=name}" FontWeight="Bold"/>
                     <TextBlock Text=": "/>
-                    <Button Name="property_edit" Click="property_edit_Click" BorderThickness="0" Background="White" Content="{Binding Path=value}"/>
-                    <TextBlock Text=" (param1:" Visibility="{Binding Path=param1, Converter={StaticResource valueVisiblityConverter}}" FontStyle="Italic"/>
-                    <TextBlock Text="{Binding Path=param1}" Visibility="{Binding Path=param1, Converter={StaticResource valueVisiblityConverter}}" FontStyle="Italic"/>
-                    <TextBlock Text=")" Visibility="{Binding Path=param1, Converter={StaticResource valueVisiblityConverter}}" FontStyle="Italic"/>
+                    <TextBlock Text="{Binding Path=value}" ToolTip="{Binding Path=value}" Foreground="Red"/>
+                    <TextBlock Text=" (param1:" Visibility="{Binding Path=param1, Converter={StaticResource valueVisiblityConverter}}"/>
+                    <TextBlock Text="{Binding Path=param1}" ToolTip="{Binding Path=param1}" Visibility="{Binding Path=param1, Converter={StaticResource valueVisiblityConverter}}" Foreground="Blue"/>
+                    <TextBlock Text=")" Visibility="{Binding Path=param1, Converter={StaticResource valueVisiblityConverter}}"/>
                 </WrapPanel>
-                <StackPanel Visibility="{Binding Path=_class, Converter={StaticResource valueVisiblityConverter}}" Width="480">
+                <StackPanel Visibility="{Binding Path=_class, Converter={StaticResource valueVisiblityConverter}}" Width="780">
                     <TextBlock Text="{Binding Path=_class}" FontWeight="Bold"/>
                     <ItemsControl ItemsSource="{Binding Path=classproperties}" ItemTemplate="{StaticResource ClassPropertyTemplate}" />
                 </StackPanel>
             </StackPanel>
         </DataTemplate>
         <DataTemplate x:Key="PropertiesTemplate">
-            <StackPanel Width="480">
+            <StackPanel Width="780">
                 <TextBlock Text="Properties" FontWeight="Bold" FontSize="16" Margin="0,0,0,0" Visibility="{Binding Path=properties.Count, Converter={StaticResource sectionVisiblityConverter}}"/>
-                <ItemsControl ItemsSource="{Binding Path=properties}" ItemTemplate="{StaticResource PropertyTemplate}"  Width="480"/>
+                <ItemsControl ItemsSource="{Binding Path=properties}" ItemTemplate="{StaticResource PropertyTemplate}"  Width="780"/>
             </StackPanel>
         </DataTemplate>
     </UserControl.Resources>
     <DockPanel>
-        <ScrollViewer DockPanel.Dock="Right" Margin="10" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Width="500">
+        <ScrollViewer DockPanel.Dock="Right" Margin="10" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Width="800">
             <StackPanel>
                 <Image Name="selectedItemImage" Margin="0" Width="116" Height="80" />
                 <WrapPanel HorizontalAlignment="Center">
@@ -49,7 +49,7 @@
                     <TextBlock Name="selectedItemID" VerticalAlignment="Center"/>
                 </WrapPanel>
                 <StackPanel>
-                    <ListView Name="selectedItemPropertiesList" BorderThickness="0" Margin="0,0,0,0" Width="500">
+                    <ListView Name="selectedItemPropertiesList" BorderThickness="0" Margin="0,0,0,0" Width="800">
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <Setter Property="Background" Value="Transparent" />
@@ -75,9 +75,10 @@
             </StackPanel>
         </ScrollViewer>
 
-        <WrapPanel DockPanel.Dock="Top" Margin="0,0,0,10" Width="auto" HorizontalAlignment="Left">
-            <TextBox Margin="10" Width="58" Text="Filters" BorderThickness="0"/>
-            <TextBox Margin="10" Name="itemNameFilter" Width="250" TextChanged="itemNameFilter_TextChanged" />
+        <WrapPanel DockPanel.Dock="Top" Margin="0,0,0,10" Width="auto">
+            <TextBox Margin="10,3,0,0" Text="Search" BorderThickness="0"/>
+            <TextBox Name="itemNameFilter" Margin="10,3,0,0" Width="250" TextChanged="itemNameFilter_TextChanged" />
+            <Button Name="filterClear" Margin="10,3,0,0" Click="filterClear_Click">Clear</Button>
         </WrapPanel>
 
         <ListView Name="ItemsList" MinWidth="300">
@@ -111,7 +112,7 @@
                             <GridViewColumnHeader Tag="id" Click="ItemsListColumnHeader_Click">ID</GridViewColumnHeader>
                         </GridViewColumn.Header>
                     </GridViewColumn>
-                    <GridViewColumn DisplayMemberBinding="{Binding name}">
+                    <GridViewColumn DisplayMemberBinding="{Binding name}" Width="300">
                         <GridViewColumn.Header>
                             <GridViewColumnHeader Tag="name" Click="ItemsListColumnHeader_Click">Name</GridViewColumnHeader>
                         </GridViewColumn.Header>

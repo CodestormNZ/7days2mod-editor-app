@@ -75,9 +75,10 @@
 
             </StackPanel>
         </StackPanel>
-        <WrapPanel DockPanel.Dock="Top" Margin="0,0,0,10" Width="auto" HorizontalAlignment="Left">
-            <TextBox Margin="10" Width="58" Text="Filters" BorderThickness="0"/>
-            <TextBox Margin="10" Name="recipeNameFilter" Width="250" TextChanged="recipeNameFilter_TextChanged" />
+        <WrapPanel DockPanel.Dock="Top" Margin="0,0,0,10" Width="auto">
+            <TextBox Margin="10,3,0,0" Text="Search" BorderThickness="0"/>
+            <TextBox Name="recipeNameFilter" Margin="10,3,0,0" Width="250" TextChanged="recipeNameFilter_TextChanged" />
+            <Button Name="filterClear" Margin="10,3,0,0" Click="filterClear_Click">Clear</Button>
         </WrapPanel>
         <Grid>
             <ListView Name="RecipesList">
@@ -179,6 +180,22 @@
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader Tag="ingredients">Ingredients</GridViewColumnHeader>
                             </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn>
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Tag="craft_exp_gain" Click="RecipesListColumnHeader_Click">
+                                    <StackPanel>
+                                        <TextBlock HorizontalAlignment="Center">Actions</TextBlock>
+                                    </StackPanel>
+                                </GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Name="recipeDeleteButton" Tag="{Binding index}" Click="recipeDeleteButton_Click">
+                                        Delete
+                                    </Button>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
                         </GridViewColumn>
                     </GridView>
                 </ListView.View>

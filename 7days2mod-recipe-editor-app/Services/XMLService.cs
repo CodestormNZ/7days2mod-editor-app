@@ -200,6 +200,9 @@ namespace _7days2mod_recipe_editor_app.Services
                                         case "value":
                                             classproperty.value = (string)classpropElement.Attribute("value");
                                             break;
+                                        case "param1":
+                                            classproperty.param1 = (string)classpropElement.Attribute("param1");
+                                            break;
                                     }
                                 }
                                 if (property.classproperties == null)
@@ -217,34 +220,6 @@ namespace _7days2mod_recipe_editor_app.Services
                 }
             }
             return itemData;
-
-            /*
-            if (File.Exists(_selectedFolder + _config.itemsXMLfile))
-            {
-                XDocument doc = XDocument.Load(_selectedFolder + _config.itemsXMLfile);
-                var items = doc.Descendants("item");
-                var itemindex = 0;
-                foreach (var item in items)
-                {
-                    Item iitem = new Item();
-                    iitem.index = itemindex++;
-                    foreach (var attr in item.Attributes())
-                    {
-                        switch (attr.Name.LocalName)
-                        {
-                            case "id":
-                                iitem.id = (string)item.Attribute("id");
-                                break;
-                            case "name":
-                                iitem.name = (string)item.Attribute("name");
-                                break;
-                        }
-                    }
-                    itemData.Add(iitem);
-                }
-            }
-            return itemData;
-            */
         }
 
         public ObservableCollection<Recipe> loadRecipes(string _selectedFolder)
